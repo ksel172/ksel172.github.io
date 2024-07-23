@@ -167,14 +167,17 @@ main {
 
 .content {
     width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
     text-align: left;
+    padding: 0 1rem;
 }
 
 .terminal {
     display: inline-block;
     text-align: left;
-    font-size: 3rem;
-    margin-bottom: 1.25rem;
+    font-size: 3rem; 
+    margin-bottom: 2rem;
     white-space: nowrap;
 }
 
@@ -185,7 +188,7 @@ main {
 #cursor {
     display: inline-block;
     width: 0.625rem;
-    height: 3rem;
+    height: 3.5rem;
     background-color: var(--text-color);
     animation: blink 0.7s infinite;
     vertical-align: middle;
@@ -199,10 +202,60 @@ main {
 }
 
 .content-p {
-    padding-top: 2rem;
+    padding-top: 3rem;
     font-size: 1.25rem;
+    text-align: left;
 }
 
+footer {
+    background-color: #01000b;
+    padding: 1rem 0;
+    box-shadow: 0 -2px 5px var(--shadow-color);
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    z-index: 1000;
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+
+.social-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--hover-underline-color);
+}
+
+@media screen and (max-width: 768px) {
+    footer .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .social-links {
+        margin-top: 1rem;
+    }
+
+    .social-links a {
+        margin: 0 0.5rem;
+    }
+}
+
+/* PHONES */
 @media screen and (max-width: 768px) {
     html {
         font-size: 14px;
@@ -235,12 +288,11 @@ main {
     }
 
     .content {
-        text-align: center;
+        text-align: left;
     }
 
     .terminal {
         font-size: 2rem;
-        display: block;
         margin-bottom: 1.5rem;
     }
 
@@ -251,7 +303,6 @@ main {
     .content-p {
         font-size: 1rem;
         padding-top: 1.5rem;
-        text-align: left;
     }
 
     .content-p br {
