@@ -1,0 +1,142 @@
+@font-face {
+    font-family: SpaceMono-Regular;
+    src: url(../fonts/Space_Mono/SpaceMono-Regular.ttf);
+}
+@font-face {
+    font-family: SpaceMono-Bold;
+    src: url(../fonts/Space_Mono/SpaceMono-Bold.ttf);
+}
+@font-face {
+    font-family: SpaceMono-Italic;
+    src: url(../fonts/Space_Mono/SpaceMono-Italic.ttf);
+}
+@font-face {
+    font-family: SpaceMono-BoldItalic;
+    src: url(../fonts/Space_Mono/SpaceMono-BoldItalic.ttf);
+}
+
+:root {
+    --primary-color: #1d1f35;
+    --bg-color: #00010f;
+    --text-color: #ffffff;
+    --button-color: #626262;
+    --hover-underline-color: #5d64b3;
+    --shadow-color: rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: SpaceMono-Regular;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background-color: #01000b;
+    padding: 20px 0;
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+}
+
+nav ul li {
+    margin-right: 60px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    position: relative;
+}
+
+nav ul li a:hover {
+    color: var(--hover-underline-color);
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    background: var(--hover-underline-color);
+    transition: width 0.3s;
+    left: 0;
+    bottom: -5px;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+.cta-buttons button {
+    color: #ffffff;
+    background-color: #151232;
+    padding: 10px 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cta-buttons button:nth-child(2) {
+    background-color: var(--primary-color);
+    color: #2c2f58;
+}
+
+.cta-buttons button:hover {
+    background-color: var(--button-color);
+}
+
+main {
+    display: flex;
+    margin-top: 50px;
+}
+
+.content {
+    flex: 2;
+    margin-right: 50px;
+}
+
+h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.wave-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 49%, var(--primary-color) 49%, var(--primary-color) 51%, transparent 51%);
+    opacity: 0.1;
+    z-index: -1;
+}
