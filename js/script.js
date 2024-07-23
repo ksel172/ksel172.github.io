@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     typeText();
 
+    // Handle the mobile menu toggle
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
 
@@ -21,16 +22,20 @@ document.addEventListener('DOMContentLoaded', function() {
         this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
     });
 
+    // Close the menu when a link is clicked
     const navLinks = document.querySelectorAll('.nav-menu a');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
-            navMenu.classList.remove('active');
-            navToggle.setAttribute('aria-expanded', 'false');
+            if (window.innerWidth <= 1024) {
+                navMenu.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+            }
         });
     });
 
+    // Handle responsive menu
     function handleResponsive() {
-        if (window.innerWidth > 768) {
+        if (window.innerWidth > 1024) {
             navMenu.classList.remove('active');
             navToggle.setAttribute('aria-expanded', 'false');
         }
