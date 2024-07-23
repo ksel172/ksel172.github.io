@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const typingElement = document.getElementById('typing-text');
-    const text = 'Welcome to WizzyCove!';
+    const text = 'Welcome to my page!';
     let index = 0;
 
     function typeText() {
@@ -18,41 +18,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     navToggle.addEventListener('click', function() {
         navMenu.classList.toggle('active');
-        navToggle.classList.toggle('active');
+        this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
     });
 
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('.nav-menu a');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
             navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
         });
     });
 
     function handleResponsive() {
         if (window.innerWidth > 768) {
             navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
         }
     }
 
     window.addEventListener('resize', handleResponsive);
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // Parallax effect for stars
-    window.addEventListener('scroll', function() {
-        const scrollPosition = window.pageYOffset;
-        document.getElementById('stars').style.transform = `translateY(-${scrollPosition * 0.1}px)`;
-        document.getElementById('stars2').style.transform = `translateY(-${scrollPosition * 0.2}px)`;
-        document.getElementById('stars3').style.transform = `translateY(-${scrollPosition * 0.3}px)`;
-    });
 });
