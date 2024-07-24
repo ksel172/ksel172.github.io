@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
-    <title>ksel172</title>
+    <title>ksel172 - Advanced Cybersecurity Portfolio</title>
 </head>
 <body>
     <canvas id="background-canvas"></canvas>
@@ -12,37 +12,59 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">ksel172</div>
+                <div class="logo" id="logo">ksel172</div>
                 <div class="nav-toggle" id="navToggle" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
                 <ul class="nav-menu" id="navMenu">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Blogs</a></li>
-                    <li><a href="#">Lab</a></li>
-                    <li class="cta-buttons"><button>Get in touch</button></li>
+                    <li><a href="#home" data-section="home">Home</a></li>
+                    <li><a href="#blogs" data-section="blogs">Blogs</a></li>
+                    <li><a href="#lab" data-section="lab">Lab</a></li>
+                    <li class="cta-buttons"><button id="contactBtn">Get in touch</button></li>
                 </ul>
             </nav>
         </div>
     </header>
     
     <main class="container">
-        <div class="content">
-            <div class="terminal">
-                <span class="prompt">ksel@axis:~$</span>
-                <span id="typing-text"></span>
-                <span id="cursor"></span>
+        <section id="home" class="active-section">
+            <div class="content">
+                <div class="terminal">
+                    <span class="prompt">ksel@axis:~$</span>
+                    <span id="typing-text"></span>
+                    <span id="cursor"></span>
+                </div>
+                <p class="content-p">
+                    Hey! My name is Konstantin, I am a cybersecurity, software development and networking enthusiast.<br>
+                    On this page I will post different findings, research and projects I've done.<br>
+                    I also post different CTF and HTB walkthroughs. <br>
+                    Feel free to explore or to contact me!
+                </p>
             </div>
-            <p class="content-p">
-                Hey! My name is Konstantin, I am a cybersecurity, software development and networking enthusiast.<br>
-                On this page I will post different findings, research and projects I've done.<br>
-                I also post different CTF and HTB walkthroughs. <br>
-                Feel free to explore or to contact me!
-            </p>
-        </div>
+        </section>
+        <section id="blogs" class="hidden-section">
+            <h2>Latest Blogs</h2>
+            <div id="blogPosts"></div>
+        </section>
+        <section id="lab" class="hidden-section">
+            <h2>Lab Projects</h2>
+            <div id="labProjects"></div>
+        </section>
     </main>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Get in Touch</h2>
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
     <script src="js/script.js"></script>
 </body>
 </html>
