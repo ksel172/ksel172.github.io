@@ -79,9 +79,8 @@ header {
 
 nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     width: 100%;
     max-width: 1200px;
     padding: 0 1rem;
@@ -113,11 +112,16 @@ nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    align-items: center;
 }
 
 nav ul li {
     position: relative;
     margin-right: 3rem;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
 }
 
 nav ul li a {
@@ -274,11 +278,16 @@ main {
         width: 100%;
         text-align: center;
         padding-top: 1rem;
+        flex-direction: column;
+        background-color: #01000b;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        box-shadow: 0 2px 5px var(--shadow-color);
     }
 
     .nav-menu.active {
         display: flex;
-        flex-direction: column;
     }
 
     nav ul li {
@@ -294,7 +303,6 @@ main {
     .content {
         text-align: left;
     }
-
 
     .terminal {
         font-size: 1.5rem;
@@ -334,11 +342,16 @@ main {
         width: 100%;
         text-align: center;
         padding-top: 1rem;
+        flex-direction: column;
+        background-color: #01000b;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        box-shadow: 0 2px 5px var(--shadow-color);
     }
 
     .nav-menu.active {
         display: flex;
-        flex-direction: column;
     }
 
     nav ul li {
@@ -354,7 +367,6 @@ main {
     .content {
         text-align: left;
     }
-
 
     .terminal {
         font-size: 1.25rem;
@@ -395,6 +407,6 @@ main {
 
 @media screen and (min-width: 769px) {
     nav {
-        justify-content: center;
+        justify-content: space-between; /* Ensure the logo is on the left and the nav items on the right */
     }
 }
