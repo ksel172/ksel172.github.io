@@ -181,8 +181,6 @@ nav .dropdown-menu a:hover {
     background-color: var(--hover-underline-color);
 }
 
-/* Responsive Styles */
-
 .cta-buttons button {
     color: #ffffff;
     background-color: #151232;
@@ -204,17 +202,6 @@ main {
     min-height: calc(100vh - 5rem);
     align-items: center;
     justify-content: center;
-}
-
-.wave-bg {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent 49%, var(--primary-color) 49%, var(--primary-color) 51%, transparent 51%);
-    opacity: 0.1;
-    z-index: -1;
 }
 
 .content {
@@ -259,7 +246,7 @@ main {
     text-align: left;
 }
 
-/* TABLETS */
+/* Responsive styles */
 @media screen and (max-width: 1024px) {
     :root {
         --base-font-size: 14px;
@@ -327,45 +314,9 @@ main {
     }
 }
 
-/* PHONES */
 @media screen and (max-width: 768px) {
     :root {
         --base-font-size: 14px;
-    }
-
-    .nav-toggle {
-        display: flex;
-    }
-
-    .nav-menu {
-        display: none;
-        width: 100%;
-        text-align: center;
-        padding-top: 1rem;
-        flex-direction: column;
-        background-color: #01000b;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        box-shadow: 0 2px 5px var(--shadow-color);
-    }
-
-    .nav-menu.active {
-        display: flex;
-    }
-
-    nav ul li {
-        margin: 0.5rem 0;
-    }
-
-    .cta-buttons {
-        width: 100%;
-        text-align: center;
-        margin-top: 1rem;
-    }
-
-    .content {
-        text-align: left;
     }
 
     .terminal {
@@ -378,11 +329,9 @@ main {
 
     .content-p {
         font-size: 1rem;
-        padding-top: 1.5rem;
     }
 }
 
-/* SMALLER PHONES */
 @media screen and (max-width: 480px) {
     :root {
         --base-font-size: 12px;
@@ -407,6 +356,6 @@ main {
 
 @media screen and (min-width: 769px) {
     nav {
-        justify-content: space-between; /* Ensure the logo is on the left and the nav items on the right */
+        justify-content: space-between;
     }
 }
