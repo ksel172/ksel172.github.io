@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     typeText();
 
        // Particle background
-       document.getElementById('background-canvas').style.backgroundImage = "url('images/untitled-10%.png')";
+       const canvas = document.getElementById('background-canvas').style.backgroundImage = "url('images/untitled-10%.png')";
        const ctx = canvas.getContext('2d');
    
        canvas.width = window.innerWidth;
