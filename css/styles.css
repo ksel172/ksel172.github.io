@@ -24,10 +24,10 @@
 
 :root {
     --primary-color: #d0d5df;
-    --bg-color: #d1d8e1; /* d1d8e1 */
-    --text-color: #080934;
-    --button-color: #2239ad26;
-    --hover-underline-color: #2239ad;
+    --bg-color: #131416; /* d1d8e1 */
+    --text-color: #ffffff;
+    --button-color: #22ad2297;
+    --hover-underline-color: #38cb13;
     --shadow-color: rgba(0,0,0,0.1);
     --base-font-size: 16px;
 }
@@ -106,6 +106,8 @@ nav {
     font-weight: bold;
     margin-right: auto;
     transition: transform 0.3s ease;
+    color: white;
+    text-decoration: none;
 }
 
 .logo:hover {
@@ -148,7 +150,7 @@ nav ul li a {
     color: var(--text-color);
     position: relative;
     font-size: 1rem;
-    color: var(--text-color)
+    color: var(--text-color);
     transition: color 0.3s ease;
 }
 
@@ -234,7 +236,7 @@ main {
 }
 
 .prompt {
-    color: #2239ad;
+    color: #3dbb1d;
 }
 
 #cursor {
@@ -254,13 +256,20 @@ main {
 }
 
 .content-p {
-    padding-top: 3rem;
+    padding-top: 6rem;
     font-size: 1.25rem;
     text-align: left;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 1s ease forwards;
     animation-delay: 1s;
+    margin-top: 5rem;
+    padding: 1.5rem 2rem;
+    border: solid;
+    border-radius: 25px;
+    border-width: 1px;
+    border-color: black;
+    backdrop-filter: blur(7px);
 }
 
 @keyframes fadeInUp {
