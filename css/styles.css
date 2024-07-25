@@ -71,7 +71,7 @@ header {
     padding: 1rem 0;
     align-items: center;
     width: 90%;
-    top: 0;
+    top: 2rem;
     z-index: 1000;
     display: flex;
     justify-content: center;
@@ -80,7 +80,6 @@ header {
     border-radius: 45px;
     border-width: 1px;
     border-color: #000000;
-    margin-top: 2rem;
     position: sticky;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
@@ -213,7 +212,7 @@ nav ul li a:hover::after {
 
 main {
     display: flex;
-    margin-top: 5rem;
+    margin-top: 7rem;
     min-height: calc(100vh - 5rem);
     align-items: center;
     justify-content: center;
