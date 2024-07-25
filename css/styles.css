@@ -50,7 +50,36 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
 }
+/* ... (keep existing CSS above) ... */
 
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-image: url('../images/background1_50%.png'); /* Adjust the path as needed */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.1; /* Adjust this value to make the background more or less visible */
+}
+
+/* Optional: Add a gradient overlay */
+#background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(19, 20, 22, 0.7), rgba(19, 20, 22, 0.3));
+    z-index: -1;
+}
+
+/* Ensure the content is above the background */
+/*
 #background-canvas {
     position: fixed;
     top: 0;
@@ -59,12 +88,13 @@ body {
     height: 100%;
     z-index: -2;
 }
-
+*/
 .container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
+    z-index: 1;
 }
 
 header {
