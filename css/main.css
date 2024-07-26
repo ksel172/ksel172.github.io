@@ -58,7 +58,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: -2;
-    background-image: url('https://raw.githubusercontent.com/ksel172/ksel172.github.io/6606d1a20a554c36ac25b346d92fbff7014bc11c/media/background1.png');
+    background-image: url('/main/media/background1.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
