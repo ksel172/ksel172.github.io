@@ -1,30 +1,40 @@
+/* Font imports */
 @font-face {
-    font-family: SpaceMono-Regular;
-    src: url(../fonts/Space_Mono/SpaceMono-Regular.ttf);
+    font-family: 'SpaceMono';
+    src: url(../fonts/Space_Mono/SpaceMono-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: SpaceMono-Bold;
-    src: url(../fonts/Space_Mono/SpaceMono-Bold.ttf);
+    font-family: 'SpaceMono';
+    src: url(../fonts/Space_Mono/SpaceMono-Bold.ttf) format('truetype');
+    font-weight: bold;
+    font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: SpaceMono-Italic;
-    src: url(../fonts/Space_Mono/SpaceMono-Italic.ttf);
+    font-family: 'SpaceMono';
+    src: url(../fonts/Space_Mono/SpaceMono-Italic.ttf) format('truetype');
+    font-weight: normal;
+    font-style: italic;
     font-display: swap;
 }
 
 @font-face {
-    font-family: SpaceMono-BoldItalic;
-    src: url(../fonts/Space_Mono/SpaceMono-BoldItalic.ttf);
+    font-family: 'SpaceMono';
+    src: url(../fonts/Space_Mono/SpaceMono-BoldItalic.ttf) format('truetype');
+    font-weight: bold;
+    font-style: italic;
     font-display: swap;
 }
 
+/* Variables */
 :root {
     --primary-color: #d0d5df;
-    --bg-color: #131416; /* d1d8e1 */
+    --bg-color: #131416;
     --text-color: #ffffff;
     --button-color: #22ad2297;
     --hover-underline-color: #38cb13;
@@ -32,11 +42,11 @@
     --base-font-size: 16px;
 }
 
+/* Base styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: SpaceMono-Regular;
 }
 
 html {
@@ -45,12 +55,23 @@ html {
 }
 
 body {
+    font-family: 'SpaceMono', monospace;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
 }
 
+/* Layout */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    z-index: 1;
+}
+
+/* Background */
 #background {
     position: fixed;
     top: 0;
@@ -65,37 +86,17 @@ body {
     opacity: 0.1;
 }
 
-/*
-#background-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-}
-*/
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    z-index: 1;
-}
-
+/* Header and Navigation */
 header {
     padding: 1rem 0;
-    align-items: center;
     width: 90%;
     top: 2rem;
     z-index: 1000;
     display: flex;
     justify-content: center;
     margin: auto;
-    border: solid;
+    border: 1px solid #000000;
     border-radius: 45px;
-    border-width: 1px;
-    border-color: #000000;
     position: sticky;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
@@ -113,20 +114,14 @@ nav {
     width: 100%;
     max-width: 1200px;
     padding: 0 1rem;
-    box-sizing: border-box;
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
     margin-right: auto;
-    transition: transform 0.3s ease;
     color: white;
     text-decoration: none;
-}
-
-.logo:hover {
-    transform: scale(1.1);
 }
 
 .nav-toggle {
@@ -146,8 +141,6 @@ nav {
 nav ul {
     display: flex;
     list-style-type: none;
-    margin: 0;
-    padding: 0;
     align-items: center;
 }
 
@@ -163,9 +156,7 @@ nav ul li:last-child {
 nav ul li a {
     text-decoration: none;
     color: var(--text-color);
-    position: relative;
     font-size: 1rem;
-    color: var(--text-color);
     transition: color 0.3s ease;
 }
 
@@ -189,6 +180,7 @@ nav ul li a:hover::after {
     width: 100%;
 }
 
+/* Buttons */
 .cta-buttons button {
     color: #000000;
     background-color: #ffffff;
@@ -226,6 +218,7 @@ nav ul li a:hover::after {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Main Content */
 main {
     display: flex;
     margin-top: 7rem;
@@ -265,13 +258,11 @@ main {
 }
 
 @keyframes blink {
-    0% { opacity: 0; }
+    0%, 100% { opacity: 0; }
     50% { opacity: 1; }
-    100% { opacity: 0; }
 }
 
 .content-p {
-    padding-top: 6rem;
     font-size: 1.25rem;
     text-align: left;
     opacity: 0;
@@ -280,10 +271,8 @@ main {
     animation-delay: 1s;
     margin-top: 5rem;
     padding: 1.5rem 2rem;
-    border: solid;
+    border: 1px solid black;
     border-radius: 25px;
-    border-width: 1px;
-    border-color: black;
     backdrop-filter: blur(7px);
 }
 
@@ -294,6 +283,7 @@ main {
     }
 }
 
+/* Section Visibility */
 .hidden-section {
     display: none;
 }
@@ -308,6 +298,7 @@ main {
     to { opacity: 1; }
 }
 
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -354,33 +345,40 @@ main {
     text-decoration: none;
 }
 
-#contactForm {
+/* Footer */
+.footer-content {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 0;
 }
 
-#contactForm input,
-#contactForm textarea {
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: SpaceMono-Regular;
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 1rem;
 }
 
-#contactForm button {
-    background-color: var(--button-color);
-    color: var(--text-color);
-    border: none;
-    padding: 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.social-icons a {
+    color: #fff;
+    transition: color 0.3s ease;
 }
 
-#contactForm button:hover {
-    background-color: var(--hover-underline-color);
-    color: #ffffff;
+.social-icons a:hover {
+    color: #3dbb1d;
+}
+
+.social-icons svg {
+    width: 24px;
+    height: 24px;
+}
+
+.footer-bottom {
+    backdrop-filter: blur(3px);
+    text-align: center;
+    margin-top: 2rem;
+    padding: 2rem 0;
+    border-top: 1px solid #555;
 }
 
 /* Responsive styles */
@@ -424,10 +422,6 @@ main {
         margin-top: 1rem;
     }
 
-    .content {
-        text-align: left;
-    }
-
     .terminal {
         font-size: 1.5rem;
         margin-bottom: 1.5rem;
@@ -444,10 +438,6 @@ main {
 
     .content-p br {
         display: none;
-    }
-
-    .wave-bg {
-        opacity: 0.05;
     }
 }
 
