@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.css": "/ksel172.github.io/css/main.css",
+    "main.js": "/ksel172.github.io/js/main.js",
+    "media/background1_50%.png": "/ksel172.github.io/media/background1_50%.png"
+  },
+  "entrypoints": [
+    "/css/main.css",
+    "/js/main.js"
+  ]
+}
