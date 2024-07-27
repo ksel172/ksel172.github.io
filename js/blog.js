@@ -8,11 +8,11 @@ async function fetchRootIndex() {
     try {
         const response = await fetch(`${BASE_URL}blogs-index.json`);
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         return await response.json();
     } catch (error) {
-        console.error('Error fetching root index:', error);
+        console.error('Error fetching root index:', error.message);
         return null;
     }
 }
@@ -21,11 +21,11 @@ async function fetchBlogData(url) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         return await response.json();
     } catch (error) {
-        console.error(`Error fetching blog data from ${url}:`, error);
+        console.error(`Error fetching blog data from ${url}:`, error.message);
         return null;
     }
 }
