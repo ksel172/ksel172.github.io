@@ -1,113 +1,118 @@
-// blog.js
-
-const baseUrl = 'https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/';
-
-let allBlogs = [];
+const BASE_URL = 'https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/';
+const BLOGS_PER_PAGE = 10;
 let currentPage = 1;
-const blogsPerPage = 10;
+let allBlogs = [];
+let totalBlogs = 0;
 
 async function fetchIndex(year, month) {
-    const url = `${baseUrl}${year}/${month}/blogs-index.json`;
     try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
+        const response = await fetch(`${BASE_URL}${year}/${month}/blogs-index.json`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
         return await response.json();
     } catch (error) {
         console.error(`Error fetching index for ${year}/${month}:`, error);
-        return [];
+        return null;
     }
 }
 
-async function fetchAllBlogs(startYear, endYear) {
-    let allBlogsData = [];
+async function fetchBlogData(year, month, index) {
+    try {
+        const response = await fetch(`${BASE_URL}${year}/${month}/${index}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error(`Error fetching blog data for ${year}/${month}/${index}:`, error);
+        return null;
+    }
+}
 
-    for (let year = startYear; year <= endYear; year++) {
-        for (let month = 1; month <= 12; month++) {
-            const monthStr = month.toString().padStart(2, '0');
-            const indexData = await fetchIndex(year, monthStr);
-            allBlogsData = allBlogsData.concat(indexData);
+async function fetchAllBlogs() {
+    const years = [2023, 2024]; // Extend as needed
+    const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+
+    for (const year of years) {
+        for (const month of months) {
+            const index = await fetchIndex(year, month);
+            if (index && Array.isArray(index)) {
+                for (const blogIndex of index) {
+                    const blogData = await fetchBlogData(year, month, blogIndex);
+                    if (blogData) {
+                        allBlogs.push(blogData);
+                    }
+                }
+            }
         }
     }
 
-    return allBlogsData;
+    allBlogs.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date, newest first
+    totalBlogs = allBlogs.length;
+    displayBlogs();
 }
 
-async function displayBlogs() {
+function displayBlogs() {
     const blogList = document.getElementById('blogList');
-    const blogContent = document.getElementById('blogContent');
-
     blogList.innerHTML = '';
-    blogContent.innerHTML = '';
 
-    const start = (currentPage - 1) * blogsPerPage;
-    const end = start + blogsPerPage;
+    const start = (currentPage - 1) * BLOGS_PER_PAGE;
+    const end = start + BLOGS_PER_PAGE;
     const blogsToDisplay = allBlogs.slice(start, end);
 
-    for (const blog of blogsToDisplay) {
-        try {
-            const blogResponse = await fetch(`https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/${blog.path}`);
-            if (!blogResponse.ok) throw new Error(`Network response was not ok: ${blogResponse.statusText}`);
-            const blogData = await blogResponse.json();
-
-            const blogItem = document.createElement('div');
-            blogItem.className = 'blog-item';
-            blogItem.innerHTML = `
-                <h2>${blogData.title}</h2>
-                <p><em>${new Date(blogData.date).toDateString()}</em></p>
-                <div>${blogData.content}</div>
-            `;
-
-            blogList.appendChild(blogItem);
-
-            blogItem.addEventListener('click', () => {
-                blogContent.innerHTML = `
-                    <h1>${blogData.title}</h1>
-                    <p><em>${new Date(blogData.date).toDateString()}</em></p>
-                    <div>${blogData.content}</div>
-                `;
-            });
-        } catch (error) {
-            console.error('Fetch blog error:', error);
-        }
-    }
+    blogsToDisplay.forEach(blog => {
+        const blogItem = document.createElement('div');
+        blogItem.className = 'blog-item';
+        blogItem.innerHTML = `
+            <h2>${blog.title}</h2>
+            <p>${new Date(blog.date).toLocaleDateString()}</p>
+            <p>${blog.content.substring(0, 100)}...</p>
+            <button onclick="showFullContent('${blog.title}')">Read More</button>
+        `;
+        blogList.appendChild(blogItem);
+    });
 
     updatePagination();
 }
 
 function updatePagination() {
     const pagination = document.getElementById('pagination');
-    if (!pagination) return;
-
     pagination.innerHTML = '';
 
-    if (currentPage > 1) {
-        const prevButton = document.createElement('button');
-        prevButton.textContent = 'Previous';
-        prevButton.addEventListener('click', () => {
-            currentPage--;
-            displayBlogs();
-        });
-        pagination.appendChild(prevButton);
-    }
+    const totalPages = Math.ceil(totalBlogs / BLOGS_PER_PAGE);
+    if (totalPages <= 1) return;
 
-    if (allBlogs.length > currentPage * blogsPerPage) {
-        const nextButton = document.createElement('button');
-        nextButton.textContent = 'Load More';
-        nextButton.addEventListener('click', () => {
-            currentPage++;
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        pageButton.onclick = () => {
+            currentPage = i;
             displayBlogs();
-        });
-        pagination.appendChild(nextButton);
+        };
+        if (i === currentPage) {
+            pageButton.disabled = true;
+        }
+        pagination.appendChild(pageButton);
     }
 }
 
-async function init() {
-    const startYear = 2023;
-    const endYear = 2024;
-    allBlogs = await fetchAllBlogs(startYear, endYear);
-
-    allBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
-    displayBlogs();
+function showFullContent(title) {
+    const blog = allBlogs.find(b => b.title === title);
+    if (blog) {
+        const blogContent = document.getElementById('blogContent');
+        blogContent.innerHTML = `
+            <h2>${blog.title}</h2>
+            <p>${new Date(blog.date).toLocaleDateString()}</p>
+            <div>${blog.content}</div>
+            <button onclick="hideFullContent()">Close</button>
+        `;
+    }
 }
 
-init();
+function hideFullContent() {
+    document.getElementById('blogContent').innerHTML = '';
+}
+
+// Initialize
+fetchAllBlogs();

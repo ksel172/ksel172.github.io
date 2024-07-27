@@ -1,0 +1,27 @@
+.blog-item {
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.blog-item:hover {
+    background-color: #f9f9f9;
+}
+
+#pagination {
+    margin-top: 20px;
+}
+
+#pagination button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+#pagination button:hover {
+    background-color: #0056b3;
+}
