@@ -1,94 +1,113 @@
-let blogStructure = {};
+// blog.js
 
-// Fetch blog structure from JSON files
-async function fetchBlogStructure() {
-    const years = ['2024', '2023']; // Define years you want to fetch
-    const months = ['12', '11', '10', '09', '08', '07', '06', '05', '04', '03', '02', '01']; // Months to check
+const baseUrl = 'https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/';
 
-    for (const year of years) {
-        blogStructure[year] = {};
-        for (const month of months) {
-            try {
-                const response = await fetch(`content/blogs/${year}/${month}/blogs.json`);
-                if (response.ok) {
-                    blogStructure[year][month] = await response.json();
-                    console.log(`Loaded blogs for ${year}/${month}`);
-                } else {
-                    console.error(`Failed to fetch blogs for ${year}/${month}. Status: ${response.status}`);
-                }
-            } catch (error) {
-                console.error(`Error fetching blogs for ${year}/${month}:`, error);
-            }
-        }
-    }
-}
+let allBlogs = [];
+let currentPage = 1;
+const blogsPerPage = 10;
 
-// Load blog list into the page
-async function loadBlogList() {
-    const blogList = document.getElementById('blogList');
-    blogList.innerHTML = ''; // Clear existing list
-
-    for (const year in blogStructure) {
-        for (const month in blogStructure[year]) {
-            for (const blog of blogStructure[year][month]) {
-                try {
-                    const response = await fetch(`content/blogs/${year}/${month}/${blog}`);
-                    if (response.ok) {
-                        const blogData = await response.json();
-                        const blogItem = document.createElement('div');
-                        blogItem.className = 'blog-item';
-                        blogItem.innerHTML = `
-                            <h2>${blogData.title}</h2>
-                            <p class="date">${blogData.date}</p>
-                            <button class="read-more" data-year="${year}" data-month="${month}" data-blog="${blog}">Read More</button>
-                        `;
-                        blogList.appendChild(blogItem);
-                    } else {
-                        console.error(`Error loading blog: ${year}/${month}/${blog}. Status: ${response.status}`);
-                    }
-                } catch (error) {
-                    console.error(`Error loading blog: ${year}/${month}/${blog}`, error);
-                }
-            }
-        }
-    }
-
-    // Add event listeners to "Read More" buttons
-    document.querySelectorAll('.read-more').forEach(button => {
-        button.addEventListener('click', loadFullBlog);
-    });
-}
-
-// Load the full blog content when "Read More" button is clicked
-async function loadFullBlog(event) {
-    const year = event.target.dataset.year;
-    const month = event.target.dataset.month;
-    const blog = event.target.dataset.blog;
-
+async function fetchIndex(year, month) {
+    const url = `${baseUrl}${year}/${month}/blogs-index.json`;
     try {
-        const response = await fetch(`content/blogs/${year}/${month}/${blog}`);
-        if (response.ok) {
-            const blogData = await response.json();
-            const blogContent = document.getElementById('blogContent');
-            blogContent.innerHTML = `
-                <h2>${blogData.title}</h2>
-                <p class="date">${blogData.date}</p>
-                <div class="content">${blogData.content}</div>
-            `;
-            blogContent.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            console.error(`Error loading full blog: ${year}/${month}/${blog}. Status: ${response.status}`);
-        }
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
+        return await response.json();
     } catch (error) {
-        console.error(`Error loading full blog: ${year}/${month}/${blog}`, error);
+        console.error(`Error fetching index for ${year}/${month}:`, error);
+        return [];
     }
 }
 
-// Initialize blog loader on page load
-async function initBlogLoader() {
-    await fetchBlogStructure();
-    await loadBlogList();
+async function fetchAllBlogs(startYear, endYear) {
+    let allBlogsData = [];
+
+    for (let year = startYear; year <= endYear; year++) {
+        for (let month = 1; month <= 12; month++) {
+            const monthStr = month.toString().padStart(2, '0');
+            const indexData = await fetchIndex(year, monthStr);
+            allBlogsData = allBlogsData.concat(indexData);
+        }
+    }
+
+    return allBlogsData;
 }
 
-// Call the initializer when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', initBlogLoader);
+async function displayBlogs() {
+    const blogList = document.getElementById('blogList');
+    const blogContent = document.getElementById('blogContent');
+
+    blogList.innerHTML = '';
+    blogContent.innerHTML = '';
+
+    const start = (currentPage - 1) * blogsPerPage;
+    const end = start + blogsPerPage;
+    const blogsToDisplay = allBlogs.slice(start, end);
+
+    for (const blog of blogsToDisplay) {
+        try {
+            const blogResponse = await fetch(`https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/${blog.path}`);
+            if (!blogResponse.ok) throw new Error(`Network response was not ok: ${blogResponse.statusText}`);
+            const blogData = await blogResponse.json();
+
+            const blogItem = document.createElement('div');
+            blogItem.className = 'blog-item';
+            blogItem.innerHTML = `
+                <h2>${blogData.title}</h2>
+                <p><em>${new Date(blogData.date).toDateString()}</em></p>
+                <div>${blogData.content}</div>
+            `;
+
+            blogList.appendChild(blogItem);
+
+            blogItem.addEventListener('click', () => {
+                blogContent.innerHTML = `
+                    <h1>${blogData.title}</h1>
+                    <p><em>${new Date(blogData.date).toDateString()}</em></p>
+                    <div>${blogData.content}</div>
+                `;
+            });
+        } catch (error) {
+            console.error('Fetch blog error:', error);
+        }
+    }
+
+    updatePagination();
+}
+
+function updatePagination() {
+    const pagination = document.getElementById('pagination');
+    if (!pagination) return;
+
+    pagination.innerHTML = '';
+
+    if (currentPage > 1) {
+        const prevButton = document.createElement('button');
+        prevButton.textContent = 'Previous';
+        prevButton.addEventListener('click', () => {
+            currentPage--;
+            displayBlogs();
+        });
+        pagination.appendChild(prevButton);
+    }
+
+    if (allBlogs.length > currentPage * blogsPerPage) {
+        const nextButton = document.createElement('button');
+        nextButton.textContent = 'Load More';
+        nextButton.addEventListener('click', () => {
+            currentPage++;
+            displayBlogs();
+        });
+        pagination.appendChild(nextButton);
+    }
+}
+
+async function init() {
+    const startYear = 2023;
+    const endYear = 2024;
+    allBlogs = await fetchAllBlogs(startYear, endYear);
+
+    allBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+    displayBlogs();
+}
+
+init();
