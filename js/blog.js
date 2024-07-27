@@ -4,45 +4,45 @@ let currentPage = 1;
 let allBlogs = [];
 let totalBlogs = 0;
 
-async function fetchIndex(year, month) {
+async function fetchRootIndex() {
     try {
-        const response = await fetch(`${BASE_URL}${year}/${month}/blogs-index.json`);
+        const response = await fetch(`${BASE_URL}blogs-index.json`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         return await response.json();
     } catch (error) {
-        console.error(`Error fetching index for ${year}/${month}:`, error);
+        console.error('Error fetching root index:', error);
         return null;
     }
 }
 
-async function fetchBlogData(year, month, index) {
+async function fetchBlogData(url) {
     try {
-        const response = await fetch(`${BASE_URL}${year}/${month}/${index}`);
+        const response = await fetch(url);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         return await response.json();
     } catch (error) {
-        console.error(`Error fetching blog data for ${year}/${month}/${index}:`, error);
+        console.error(`Error fetching blog data from ${url}:`, error);
         return null;
     }
 }
 
 async function fetchAllBlogs() {
-    const years = [2023, 2024]; // Extend as needed
-    const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+    const rootIndex = await fetchRootIndex();
+    if (!rootIndex) return;
 
-    for (const year of years) {
-        for (const month of months) {
-            const index = await fetchIndex(year, month);
-            if (index && Array.isArray(index)) {
-                for (const blogIndex of index) {
-                    const blogData = await fetchBlogData(year, month, blogIndex);
-                    if (blogData) {
-                        allBlogs.push(blogData);
-                    }
+    for (const [year, months] of Object.entries(rootIndex)) {
+        for (const [month, blogs] of Object.entries(months)) {
+            for (const blog of blogs) {
+                const blogData = await fetchBlogData(blog.url);
+                if (blogData) {
+                    allBlogs.push({
+                        ...blog,
+                        content: blogData.content // Add content to the blog data
+                    });
                 }
             }
         }
@@ -68,7 +68,7 @@ function displayBlogs() {
             <h2>${blog.title}</h2>
             <p>${new Date(blog.date).toLocaleDateString()}</p>
             <p>${blog.content.substring(0, 100)}...</p>
-            <button onclick="showFullContent('${blog.title}')">Read More</button>
+            <a href="${blog.url}" target="_blank">Read More</a>
         `;
         blogList.appendChild(blogItem);
     });
@@ -95,23 +95,6 @@ function updatePagination() {
         }
         pagination.appendChild(pageButton);
     }
-}
-
-function showFullContent(title) {
-    const blog = allBlogs.find(b => b.title === title);
-    if (blog) {
-        const blogContent = document.getElementById('blogContent');
-        blogContent.innerHTML = `
-            <h2>${blog.title}</h2>
-            <p>${new Date(blog.date).toLocaleDateString()}</p>
-            <div>${blog.content}</div>
-            <button onclick="hideFullContent()">Close</button>
-        `;
-    }
-}
-
-function hideFullContent() {
-    document.getElementById('blogContent').innerHTML = '';
 }
 
 // Initialize

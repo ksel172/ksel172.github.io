@@ -1,0 +1,43 @@
+{
+    "2024": {
+      "01": [
+        {
+          "title": "Blog Post Title 1",
+          "date": "2024-01-01",
+          "file": "blog1.json",
+          "url": "https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/2024/01/blog1.json"
+        },
+        {
+          "title": "Blog Post Title 2",
+          "date": "2024-01-15",
+          "file": "blog2.json",
+          "url": "https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/2024/01/blog2.json"
+        }
+      ],
+      "02": [
+        {
+          "title": "Blog Post Title 3",
+          "date": "2024-02-01",
+          "file": "blog3.json",
+          "url": "https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/2024/02/blog3.json"
+        }
+      ]
+    },
+    "2023": {
+      "12": [
+        {
+          "title": "Blog Post Title 4",
+          "date": "2023-12-01",
+          "file": "blog4.json",
+          "url": "https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/2023/12/blog4.json"
+        },
+        {
+          "title": "Blog Post Title 5",
+          "date": "2023-12-15",
+          "file": "blog5.json",
+          "url": "https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/2023/12/blog5.json"
+        }
+      ]
+    }
+  }
+  
