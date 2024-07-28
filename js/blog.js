@@ -66,11 +66,15 @@ function displayBlogs() {
     blogsToDisplay.forEach(blog => {
         const blogItem = document.createElement('div');
         blogItem.className = 'blog-item';
+        
+        // Use the htmlPath directly from the blog data
+        const htmlPath = blog.htmlPath || '#'; // Fallback to '#' if htmlPath is undefined
+        
         blogItem.innerHTML = `
             <h2>${blog.title}</h2>
             <p class="date">${new Date(blog.date).toLocaleDateString()}</p>
             <p class="excerpt">${blog.excerpt || ''}</p>
-            <a href="${blog.htmlPath}" class="read-more">Read More</a>
+            <a href="${htmlPath}" class="read-more">Read More</a>
         `;
         blogList.appendChild(blogItem);
     });

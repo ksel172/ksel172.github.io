@@ -1,7 +1,7 @@
 {
   "title": "Blog Post Title",
   "date": "2024-07-01",
-  "htmlPath": "/blogs/2024/07/blog1.html",
+  "htmlPath": "https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/2024/07/blog1.html",
   "excerpt": "This is a brief excerpt of the blog post...",
   "tags": ["tag1", "tag2"]
 }
