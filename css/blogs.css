@@ -1,16 +1,113 @@
-.blog-item {
+/* blogs.css */
+:root {
+    --primary-color: #d0d5df;
+    --bg-color: #131416;
+    --text-color: #ffffff;
+    --button-color: #22ad2297;
+    --hover-underline-color: #38cb13;
+    --tag-color: #23262a;
+    --shadow-color: rgba(0,0,0,0.1);
+    --base-font-size: 16px;
+}
+
+.blog-filters {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
-    cursor: pointer;
-    border: 1px solid #ddd;
+}
+
+#searchInput, #tagFilter {
     padding: 10px;
+    font-size: 16px;
+    border: 1px solid #000000;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-radius: 4px;
+}
+
+#searchInput {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+#tagFilter {
+    min-width: 150px;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.blog-item {
+    background-color: var(--bg-color);
+    border: 1px solid #000000;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
 .blog-item:hover {
-    background-color: #f9f9f9;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.blog-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-item h2 {
+    font-size: 1.2em;
+    margin: 10px 0;
+    padding: 0 15px;
+}
+
+.blog-item .date {
+    font-size: 0.9em;
+    color: #777;
+    padding: 0 15px;
+}
+
+.blog-item .excerpt {
+    font-size: 0.9em;
+    padding: 0 15px;
+    margin-bottom: 10px;
+}
+
+.blog-item .tags {
+    padding: 0 15px;
+    margin-bottom: 10px;
+}
+
+.tag {
+    display: inline-block;
+    background-color: var(--tag-color);
+    padding: 3px 8px;
+    margin-right: 5px;
+    border-radius: 4px;
+    font-size: 0.8em;
+}
+
+.read-more {
+    display: block;
+    text-align: center;
+    background-color: var(--button-color);
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.read-more:hover {
+    background-color: #164808;
 }
 
 #pagination {
     margin-top: 20px;
+    text-align: center;
 }
 
 #pagination button {
@@ -20,8 +117,15 @@
     padding: 10px 20px;
     margin: 5px;
     cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
 #pagination button:hover {
     background-color: #0056b3;
+}
+
+#pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }

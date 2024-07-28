@@ -1,10 +1,10 @@
 // blog.js
-
 const BASE_URL = 'https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/';
 const BLOGS_PER_PAGE = 10;
 let currentPage = 1;
 let allBlogs = [];
 let totalBlogs = 0;
+let filteredBlogs = [];
 
 async function fetchRootIndex() {
     try {
@@ -52,7 +52,9 @@ async function fetchAllBlogs() {
 
     allBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
     totalBlogs = allBlogs.length;
+    filteredBlogs = [...allBlogs];
     displayBlogs();
+    populateTagFilter();
 }
 
 function displayBlogs() {
@@ -61,19 +63,20 @@ function displayBlogs() {
 
     const start = (currentPage - 1) * BLOGS_PER_PAGE;
     const end = start + BLOGS_PER_PAGE;
-    const blogsToDisplay = allBlogs.slice(start, end);
+    const blogsToDisplay = filteredBlogs.slice(start, end);
 
     blogsToDisplay.forEach(blog => {
         const blogItem = document.createElement('div');
         blogItem.className = 'blog-item';
-        
-        // Use the htmlPath directly from the blog data
-        const htmlPath = blog.htmlPath || '#'; // Fallback to '#' if htmlPath is undefined
-        
+
+        const htmlPath = blog.htmlPath || '#';
+
         blogItem.innerHTML = `
+            <img src="${blog.image || 'placeholder.jpg'}" alt="${blog.title}" class="blog-image">
             <h2>${blog.title}</h2>
             <p class="date">${new Date(blog.date).toLocaleDateString()}</p>
             <p class="excerpt">${blog.excerpt || ''}</p>
+            <p class="tags">${blog.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</p>
             <a href="${htmlPath}" class="read-more">Read More</a>
         `;
         blogList.appendChild(blogItem);
@@ -86,7 +89,7 @@ function updatePagination() {
     const pagination = document.getElementById('pagination');
     pagination.innerHTML = '';
 
-    const totalPages = Math.ceil(totalBlogs / BLOGS_PER_PAGE);
+    const totalPages = Math.ceil(filteredBlogs.length / BLOGS_PER_PAGE);
     if (totalPages <= 1) return;
 
     for (let i = 1; i <= totalPages; i++) {
@@ -102,6 +105,37 @@ function updatePagination() {
         pagination.appendChild(pageButton);
     }
 }
+
+function populateTagFilter() {
+    const tagFilter = document.getElementById('tagFilter');
+    const allTags = new Set(allBlogs.flatMap(blog => blog.tags));
+    
+    allTags.forEach(tag => {
+        const option = document.createElement('option');
+        option.value = tag;
+        option.textContent = tag;
+        tagFilter.appendChild(option);
+    });
+}
+
+function filterBlogs() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const selectedTag = document.getElementById('tagFilter').value;
+
+    filteredBlogs = allBlogs.filter(blog => {
+        const matchesSearch = blog.title.toLowerCase().includes(searchTerm) || 
+                              blog.excerpt.toLowerCase().includes(searchTerm);
+        const matchesTag = selectedTag === '' || blog.tags.includes(selectedTag);
+        return matchesSearch && matchesTag;
+    });
+
+    currentPage = 1;
+    displayBlogs();
+}
+
+// Event listeners
+document.getElementById('searchInput').addEventListener('input', filterBlogs);
+document.getElementById('tagFilter').addEventListener('change', filterBlogs);
 
 // Initialize
 fetchAllBlogs();
