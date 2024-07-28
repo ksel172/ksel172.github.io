@@ -15,9 +15,9 @@
     padding: 0 1rem;
     z-index: 1;
     display: flex;
-    gap: 20px;  /* Increased gap for better spacing */
+    gap: 20px;
     justify-content: space-between;
-    align-items: flex-start;  /* Align items at the top */
+    align-items: flex-start;
     list-style-type: none;
 }
 
@@ -25,21 +25,24 @@
     display: flex;
     gap: 20px;
     padding: 20px;
+    margin-top: 7rem;
+    margin-bottom: 7rem;
 }
 
 .blog-content {
     flex-grow: 1;
-    max-width: 80%;  /* Make it wider */
+    max-width: 100%;
 }
 
 .blog-sidebar {
-    width: 20%;  /* Adjust width */
-    padding: 20px;
     background-color: var(--bg-color);
-    border-radius: 8px;
-    position: sticky;
-    top: 20px;
-    height: fit-content;
+    width: 30%;
+    max-width: 1200px;
+    margin: auto;
+    top: 50%;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 25px;
 }
 
 .blog-sidebar h2, .blog-sidebar h3, .blog-sidebar p, .blog-sidebar ul {
@@ -96,7 +99,7 @@
 }
 
 .blog-tags {
-    margin-bottom: 15px;
+    margin-top: 25px;
 }
 
 .tag {

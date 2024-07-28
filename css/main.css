@@ -70,14 +70,14 @@ body {
     padding: 0 1rem;
     z-index: 1;
 }
-.blogs-container {
-    width: 90%;
+
+.blog-container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 0 1rem;
-    z-index: 1;
-    top: 5rem;
-    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 
