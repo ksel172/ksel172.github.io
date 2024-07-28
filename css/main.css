@@ -70,6 +70,16 @@ body {
     padding: 0 1rem;
     z-index: 1;
 }
+.blogs-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    z-index: 1;
+    top: 5rem;
+    margin-top: 5rem;
+}
+
 
 /* Background */
 #background {
@@ -221,11 +231,12 @@ nav ul li a:hover::after {
 /* Main Content */
 main {
     display: flex;
-    margin-top: 7rem;
+    margin-top: 15vh;
     min-height: calc(100vh - 5rem);
     align-items: center;
     justify-content: center;
 }
+
 
 .content {
     width: 100%;

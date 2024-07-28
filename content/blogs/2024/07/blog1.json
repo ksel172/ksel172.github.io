@@ -1,6 +1,7 @@
 {
   "title": "My first blog",
   "date": "2024-07-01",
+  "author": "KSel",
   "htmlPath": "content/blogs/2024/07/blog1.html",
   "excerpt": "This is the description of my first blog",
   "tags": ["first", "blog"],

@@ -72,13 +72,26 @@ function displayBlogs() {
         const htmlPath = blog.htmlPath || '#';
 
         blogItem.innerHTML = `
+        <article class="blog-item">
             <img src="${blog.image || 'placeholder.jpg'}" alt="${blog.title}" class="blog-image">
-            <h2>${blog.title}</h2>
-            <p class="date">${new Date(blog.date).toLocaleDateString()}</p>
-            <p class="excerpt">${blog.excerpt || ''}</p>
-            <p class="tags">${blog.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}</p>
-            <a href="${htmlPath}" class="read-more">Read More</a>
-        `;
+            <div class="blog-details">
+                <div class="blog-header">
+                    <h2 class="blog-title">${blog.title}</h2>
+                    <p class="blog-meta">
+                        ${new Date(blog.date).toLocaleDateString()} :: ${blog.author || 'Unknown Author'}
+                    </p>
+                    <p class="blog-tags">
+                        ${blog.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ')}
+                    </p>
+                </div>
+                <div class="blog-footer">
+                    <a href="${htmlPath}" class="read-more" aria-label="Read more about ${blog.title}">READ MORE &gt;</a>
+                </div>
+            </div>
+        </article>
+    `;
+      
+    
         blogList.appendChild(blogItem);
     });
 
