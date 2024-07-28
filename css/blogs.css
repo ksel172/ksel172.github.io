@@ -10,28 +10,36 @@
     --base-font-size: 16px;
 }
 
+.blog-layout {
+    display: flex;
+    gap: 20px;
+}
+
+.blog-sidebar {
+    width: 250px;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+.blog-content {
+    flex-grow: 1;
+}
+
 .blog-filters {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    flex-direction: column;
+    gap: 10px;
 }
 
 #searchInput, #tagFilter {
+    width: 100%;
     padding: 10px;
-    font-size: 16px;
+    font-size: var(--base-font-size);
     border: 1px solid #000000;
     background-color: var(--bg-color);
     color: var(--text-color);
     border-radius: 4px;
-}
-
-#searchInput {
-    flex-grow: 1;
-    margin-right: 10px;
-}
-
-#tagFilter {
-    min-width: 150px;
 }
 
 .blog-grid {
@@ -50,7 +58,7 @@
 
 .blog-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 .blog-image {
@@ -63,11 +71,12 @@
     font-size: 1.2em;
     margin: 10px 0;
     padding: 0 15px;
+    color: var(--text-color);
 }
 
 .blog-item .date {
     font-size: 0.9em;
-    color: #777;
+    color: var(--primary-color);
     padding: 0 15px;
 }
 
@@ -75,6 +84,7 @@
     font-size: 0.9em;
     padding: 0 15px;
     margin-bottom: 10px;
+    color: var(--text-color);
 }
 
 .blog-item .tags {
@@ -85,6 +95,7 @@
 .tag {
     display: inline-block;
     background-color: var(--tag-color);
+    color: var(--text-color);
     padding: 3px 8px;
     margin-right: 5px;
     border-radius: 4px;
@@ -95,37 +106,44 @@
     display: block;
     text-align: center;
     background-color: var(--button-color);
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     padding: 10px;
     transition: background-color 0.3s ease;
+    width: 100%;
 }
 
 .read-more:hover {
-    background-color: #164808;
+    background-color: var(--hover-underline-color);
 }
 
-#pagination {
-    margin-top: 20px;
-    text-align: center;
-}
-
-#pagination button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
+.show-more-btn {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
     padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border: none;
     border-radius: 4px;
+    cursor: pointer;
+    font-size: var(--base-font-size);
     transition: background-color 0.3s ease;
 }
 
-#pagination button:hover {
-    background-color: #0056b3;
+.show-more-btn:hover {
+    background-color: var(--hover-underline-color);
 }
 
-#pagination button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+/* Responsive design */
+@media (max-width: 768px) {
+    .blog-layout {
+        flex-direction: column;
+    }
+
+    .blog-sidebar {
+        width: 100%;
+        position: static;
+        margin-bottom: 20px;
+    }
 }

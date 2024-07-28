@@ -3,5 +3,6 @@
   "date": "2024-07-01",
   "htmlPath": "content/blogs/2024/07/blog2.html",
   "excerpt": "This is the description of my second blog",
-  "tags": ["second", "blog"]
+  "tags": ["second", "blog"],
+  "image": "content/images/2024/07/blog2/header-image.jpg"
 }
