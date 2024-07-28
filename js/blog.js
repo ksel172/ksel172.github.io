@@ -1,3 +1,5 @@
+// blog.js
+
 const BASE_URL = 'https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/';
 const BLOGS_PER_PAGE = 10;
 let currentPage = 1;
@@ -41,14 +43,14 @@ async function fetchAllBlogs() {
                 if (blogData) {
                     allBlogs.push({
                         ...blog,
-                        content: blogData.content // Add content to the blog data
+                        ...blogData
                     });
                 }
             }
         }
     }
 
-    allBlogs.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date, newest first
+    allBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
     totalBlogs = allBlogs.length;
     displayBlogs();
 }
@@ -66,9 +68,9 @@ function displayBlogs() {
         blogItem.className = 'blog-item';
         blogItem.innerHTML = `
             <h2>${blog.title}</h2>
-            <p>${new Date(blog.date).toLocaleDateString()}</p>
-            <p>${blog.content.substring(0, 100)}...</p>
-            <a href="${blog.url}" target="_blank">Read More</a>
+            <p class="date">${new Date(blog.date).toLocaleDateString()}</p>
+            <p class="excerpt">${blog.excerpt || ''}</p>
+            <a href="${blog.htmlPath}" class="read-more">Read More</a>
         `;
         blogList.appendChild(blogItem);
     });

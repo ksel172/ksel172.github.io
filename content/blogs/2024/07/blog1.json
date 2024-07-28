@@ -1,5 +1,7 @@
 {
-    "title": "Blog Post Title",
-    "date": "2024-07-01",
-    "content": "<p>Blog post content here...</p>"
-  }
+  "title": "Blog Post Title",
+  "date": "2024-07-01",
+  "htmlPath": "/blogs/2024/07/blog1.html",
+  "excerpt": "This is a brief excerpt of the blog post...",
+  "tags": ["tag1", "tag2"]
+}

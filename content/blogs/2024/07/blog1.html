@@ -1,61 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
-    <title>ksel172</title>
-</head>
-<body>
-    <canvas id="background"></canvas>
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo" id="logo">ksel172</div>
-                <div class="nav-toggle" id="navToggle" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html" data-section="home">Home</a></li>
-                    <li><a href="blogs.html">Blogs</a></li>
-                    <li><a href="#lab" data-section="lab">Lab</a></li>
-                    <li class="cta-buttons"><button id="contactBtn">Get in Touch</button></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    
-    <main class="container">
-        <section id="home" class="active-section">
-            <div class="content">
-                <h1>THIS IS A TEST BLOG</h1>
-            </div>
-        </section>
-    </main>
-    
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2><a href="#contact">Get in Touch</a></h2>
-        </div>
-    </div>
-    
-    <footer>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Konstantin Seliadtsou. All rights reserved.</p>
-            <div class="social-icons">
-                <a href="https://github.com/ksel172" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                </a>
-                <a href="https://twitter.com/ksel172" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22.46 6c-.8.36-1.66.6-2.56.71.92-.55 1.62-1.41 1.95-2.44-.86.51-1.81.87-2.83 1.07-.81-.86-1.96-1.4-3.24-1.4-2.45 0-4.43 1.98-4.43 4.43 0 .35.04.69.1 1.02-3.68-.18-6.94-1.95-9.13-4.62-.38.66-.6 1.43-.6 2.25 0 1.55.79 2.91 1.98 3.72-.73-.02-1.42-.22-2.02-.56v.06c0 2.16 1.54 3.96 3.58 4.37-.38.1-.78.16-1.19.16-.29 0-.57-.03-.85-.08.57 1.79 2.21 3.1 4.15 3.13-1.53 1.2-3.45 1.91-5.54 1.91-.36 0-.72-.02-1.08-.06 1.98 1.27 4.31 2.01 6.82 2.01 8.17 0 12.64-6.77 12.64-12.64 0-.19-.01-.38-.02-.57.87-.62 1.63-1.39 2.24-2.27z"/></svg>
-                </a>
-            </div>
-        </div>
-    </footer>
-    <script src="js/main.js"></script>
-    <script src="js/blog.js"></script>
-</body>
-</html>
+// blog.js
+
+const BASE_URL = 'https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/';
+const BLOGS_PER_PAGE = 10;
+let currentPage = 1;
+let allBlogs = [];
+let totalBlogs = 0;
+
+async function fetchRootIndex() {
+    try {
+        const response = await fetch(`${BASE_URL}blogs-index.json`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching root index:', error.message);
+        return null;
+    }
+}
+
+async function fetchAllBlogs() {
+    const rootIndex = await fetchRootIndex();
+    if (!rootIndex) return;
+
+    for (const [year, months] of Object.entries(rootIndex)) {
+        for (const [month, blogs] of Object.entries(months)) {
+            allBlogs.push(...blogs);
+        }
+    }
+
+    allBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+    totalBlogs = allBlogs.length;
+    displayBlogs();
+}
+
+function displayBlogs() {
+    const blogList = document.getElementById('blogList');
+    blogList.innerHTML = '';
+
+    const start = (currentPage - 1) * BLOGS_PER_PAGE;
+    const end = start + BLOGS_PER_PAGE;
+    const blogsToDisplay = allBlogs.slice(start, end);
+
+    blogsToDisplay.forEach(blog => {
+        const blogItem = document.createElement('div');
+        blogItem.className = 'blog-item';
+        blogItem.innerHTML = `
+            <h2>${blog.title}</h2>
+            <p class="date">${new Date(blog.date).toLocaleDateString()}</p>
+            <a href="${blog.file.replace('.json', '.html')}" class="read-more">Read More</a>
+        `;
+        blogList.appendChild(blogItem);
+    });
+
+    updatePagination();
+}
+
+function updatePagination() {
+    const pagination = document.getElementById('pagination');
+    pagination.innerHTML = '';
+
+    const totalPages = Math.ceil(totalBlogs / BLOGS_PER_PAGE);
+    if (totalPages <= 1) return;
+
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        pageButton.onclick = () => {
+            currentPage = i;
+            displayBlogs();
+        };
+        if (i === currentPage) {
+            pageButton.disabled = true;
+        }
+        pagination.appendChild(pageButton);
+    }
+}
+
+// Initialize
+fetchAllBlogs();
