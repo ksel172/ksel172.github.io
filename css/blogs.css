@@ -17,8 +17,10 @@
 }
 
 .search-filter-container {
+    width: 85%;
     background-color: var(--bg-color);
     padding: 1.5rem;
+    margin: auto;
     margin-top: 7rem;
     border: 1px solid var(--border-color);
     border-radius: 12px;
