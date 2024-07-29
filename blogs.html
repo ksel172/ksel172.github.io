@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/blogs.css">
     <title>ksel172 - Blog</title>
 </head>
 <body>
-    <canvas id="background" aria-hidden="true"></canvas>
+    <canvas id="background"></canvas>
     <header>
-        <div class="container">
-            <nav aria-label="Main Navigation">
+        <div class="header-container">
+            <nav>
                 <div class="logo" id="logo">ksel172</div>
-                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <div class="nav-toggle" id="navToggle" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
-                </button>
+                </div>
                 <ul class="nav-menu" id="navMenu">
-                    <li><a href="/index.html" data-section="home">Home</a></li>
-                    <li><a href="/blogs.html" class="active">Blogs</a></li>
+                    <li><a href="index.html" data-section="home">Home</a></li>
+                    <li><a href="blogs.html">Blogs</a></li>
                     <li><a href="#lab" data-section="lab">Lab</a></li>
-                    <li class="cta-buttons"><button id="contactBtn" aria-label="Contact">Get in Touch</button></li>
+                    <li class="cta-buttons"><button id="contactBtn">Get in Touch</button></li>
                 </ul>
             </nav>
         </div>
     </header>
+    
     <div class="blog-container">
         <div class="search-filter-container">
             <div class="blog-filters">
