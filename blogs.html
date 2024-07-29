@@ -28,8 +28,22 @@
             </nav>
         </div>
     </header>
+    <div class="blog-container">
+        <div class="search-filter-container">
+            <div class="blog-filters">
+                <div class="search-wrapper">
+                    <label for="searchInput" class="label">Search Blogs</label>
+                    <input type="text" id="searchInput" placeholder="Search blogs..." aria-label="Search blogs">
+                </div>
+                <div class="filter-wrapper">
+                    <label for="tagFilter" class="label">Filter by Tag</label>
+                    <select id="tagFilter" aria-label="Filter by tag">
+                        <option value="">All Tags</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
-        <div class="blog-container">
         <div class="blog-layout">
             <section id="blogs" class="blog-content active-section">
                 <div class="content">
@@ -38,31 +52,6 @@
                     <div id="pagination" class="pagination"></div>
                 </div>
             </section>
-        </div>
-    </div>
-    <aside class="blog-sidebar">
-        <div class="blog-filters">
-            <label for="searchInput" class="visually-hidden">Search Blogs</label>
-            <input type="text" id="searchInput" placeholder="Search blogs..." aria-label="Search blogs">
-            <label for="tagFilter" class="visually-hidden">Filter by Tag</label>
-            <select id="tagFilter" aria-label="Filter by tag">
-                <option value="">All Tags</option>
-            </select>
-        </div>
-    </aside>
-    <div id="modal" class="modal" aria-hidden="true">
-        <div class="modal-content">
-            <button class="close" aria-label="Close modal">&times;</button>
-            <h2>Get in Touch</h2>
-            <form id="contactForm">
-                <label for="name" class="visually-hidden">Your Name</label>
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
-                <label for="email" class="visually-hidden">Your Email</label>
-                <input type="email" id="email" name="email" placeholder="Your Email" required>
-                <label for="message" class="visually-hidden">Your Message</label>
-                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
         </div>
     </div>
 
