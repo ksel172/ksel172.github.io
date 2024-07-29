@@ -3,13 +3,11 @@
       "07": [
           {
               "title": "Blog Post Title 1",
-              "date": "2024-07-01",
               "file": "blog1.json",
               "url": "https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/2024/07/blog1.json"
           },
           {
               "title": "Blog Post Title 2",
-              "date": "2024-07-15",
               "file": "blog2.json",
               "url": "https://raw.githubusercontent.com/ksel172/ksel172.github.io/main/content/blogs/2024/07/blog2.json"
           }
