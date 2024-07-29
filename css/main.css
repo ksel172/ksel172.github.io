@@ -38,6 +38,7 @@
     --text-color: #ffffff;
     --button-color: #22ad2297;
     --hover-underline-color: #38cb13;
+    --border-color: #3a3d42;
     --shadow-color: rgba(0,0,0,0.1);
     --base-font-size: 16px;
 }
@@ -112,7 +113,7 @@ header {
     display: flex;
     justify-content: center;
     margin: auto;
-    border: 1px solid #000000;
+    border: 1px solid var(--border-color);
     border-radius: 45px;
     position: sticky;
     backdrop-filter: blur(10px);
@@ -289,7 +290,7 @@ main {
     animation-delay: 1s;
     margin-top: 5rem;
     padding: 1.5rem 2rem;
-    border: 1px solid black;
+    border: 1px solid var(--border-color);
     border-radius: 25px;
     backdrop-filter: blur(7px);
 }
@@ -419,7 +420,8 @@ main {
         text-align: center;
         padding-top: 1rem;
         flex-direction: column;
-        background-color: #01000b;
+        background-color: var(--bg-color);
+        border-radius: 25px;
         position: absolute;
         top: 100%;
         left: 0;
@@ -428,6 +430,7 @@ main {
 
     .nav-menu.active {
         display: flex;
+        background-color: var(--bg-color);
     }
 
     nav ul li {
