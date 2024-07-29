@@ -289,7 +289,6 @@ main {
     animation-delay: 1s;
     margin-top: 5rem;
     padding: 1.5rem 2rem;
-    border: 1px solid var(--border-color);
     border-radius: 25px;
     backdrop-filter: blur(7px);
 }
