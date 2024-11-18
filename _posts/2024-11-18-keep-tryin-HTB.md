@@ -7,7 +7,7 @@ tags: HTB Forensics
 ---
 
 
-###Description: This packet capture seems to show some suspicious traffic
+##Description: This packet capture seems to show some suspicious traffic
 
 ##Challenge
 
