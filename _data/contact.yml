@@ -31,9 +31,9 @@
 #   icon: 'fa-brands fa-bluesky'
 #   url: ''                   # Fill with your Bluesky profile link
 #
- - type: reddit
-   icon: 'fa-brands fa-reddit'
-   url: 'https://www.reddit.com/user/ExplicitPotato447/'                   # Fill with your Reddit profile link
+# - type: reddit
+#   icon: 'fa-brands fa-reddit'
+#   url: ''                   # Fill with your Reddit profile link
 #
 # - type: threads
 #   icon: 'fa-brands fa-threads'
