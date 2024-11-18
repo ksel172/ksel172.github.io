@@ -58,4 +58,4 @@ It's encrypted. First I changed my base64 to urlsafeB64 considering the format a
 This definitely looks like it might be a file! Using the inbuilt download function in CyberChef I downloaded the file and it gave me the secret.txt file.
 ![secret.txt](/assets/img/blogs/2024-11-18-keep-tryin-HTB/image9.png)
 
-And we get the flag: ```HTB{$n3aky_DN$_Tr1ck$}```
+And we get the flag.
