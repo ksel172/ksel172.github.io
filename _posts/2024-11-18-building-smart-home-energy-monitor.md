@@ -133,6 +133,10 @@ The process is split into 3 steps:
 
 3. **Continuous logging** is important to keep the user informed about the device's integrity and events. Thankfully, this can also be done due to Shelly's implementation of logs accessible at `<clientID>/debug/log`.
 
+![BarChart](/assets/img/2024-11-18-building-smart-home-energy-monitor/barchart_image.png)
+![Devices](/assets/img/2024-11-18-building-smart-home-energy-monitor/devices_image.png)
+![Metrics](/assets/img/2024-11-18-building-smart-home-energy-monitor/metrics_image.png)
+
 ## Final Thoughts
 
 This project ended up being a little internship project for me and I wrote a big PoC document with more details on the process. I am pleased with the result and would love doing something like this again. Thank you for reading!
