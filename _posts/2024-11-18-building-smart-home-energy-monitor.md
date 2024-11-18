@@ -4,8 +4,6 @@ title: "Building a Smart Home Energy Monitor with Shelly Devices PoC"
 author: ksel172
 ---
 
-# Building a Smart Home Energy Monitor with Shelly Devices PoC
-
 ## Resources
 
 The measurements are done using 2 Shelly PM Mini Gen 3 power meters. The installation for these power meters is intrusive but there are non-intrusive alternatives like the Shelly Pro 3EM. A different power meter manufacturer can be used, as well as a mix of different manufacturers.
@@ -18,7 +16,7 @@ For pulling and displaying the data I made a .NET application (the language bein
 
 ## Background
 
-This project has been an idea for a while but I took action on its actual development after my relocation to a new apartment where I set up a boiler and an AC, the energy consumption of which, had me very interested. After doing some research and using my background from studying electrotechnics and telecommunications, I quickly found several options for taking measurements for energy consumption.
+This project has been an idea for a while but I took action on its actual development after my relocation to a new apartment where I set up a boiler and an AC, the energy consumption of which, had me very interested. After doing some research and using my background from studying electrotechnics, I quickly found several options for taking measurements for energy consumption.
 
 After deciding to go with the cheaper and more intrusive alternative, I bought 2 Shelly PM Mini Gen 3s, which are usually installed in a socket to measure the consumption out of it. Instead, I figured out how to set it in my apartment's main distribution panel. After installing the Shellies and configuring all the details, I visited the control panel at `https://control.shelly.cloud/`.
 
