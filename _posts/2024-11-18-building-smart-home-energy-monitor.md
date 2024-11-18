@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "Building a Smart Home Energy Monitor with Shelly Devices PoC"
-author:
-- ksel172
+author: ksel172
 category: Software Development
 tags: IoT Cloud Redis C#
 ---
