@@ -133,33 +133,27 @@ After a payload is compiled (as will be shown in Usage), the executable can be d
 #### Authenticating as a User
 
 In the image below, I authenticate as the default admin user `Meduza:Meduza` and obtain the auth token, which I set across my Postman requests as the Bearer.
-
 ![authentication using the default admin](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/teamserver-auth.png)
 
 The user interface (already functional sign-in during v0.3):
 
 ![authentication user interface](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/auth-ui.png)
-
 #### Starting a Listener
 
 To start a listener, we first need to create it. Based on the listener type, we get different configuration options for listener-agent communication. In this case, v0.3 only supports HTTP listeners. However, the logic has been written for resolving other listener types and will be completed in the next version.
 
 Below, I created an HTTP listener with a basic configuration:
-
 ![creation of an http listener](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/listener-create.png)
 
 After creating the listener, we can get its ID and start it:
-
 ![get listeners](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/get-listeners.png)
 
 ![starting a listener](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/start-listener.png)
 
 Which looks like this in the server log:
-
 ![logger showing listener starting](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/listener-start-cli.png)
 
 Listener creation also works in the user interface in v0.3:
-
 ![listener creation user interface](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/listener-ui.png)
 
 #### Running Shell Commands
@@ -167,7 +161,6 @@ Listener creation also works in the user interface in v0.3:
 Once an agent is created and registered, we can start running commands (sending tasks to the agent). There are several command types to choose from. The most basic one is the `shell` command, which executes a command in the cmd using the `/c` prepend.
 
 Here we will run a list directory command:
-
 ![setting a shell task](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/set-shell-task.png)
 
 #### Uploading Modules
@@ -175,11 +168,9 @@ Here we will run a list directory command:
 One of the main goals of the project is modularity. Once a module is developed, it can be packaged and released on GitHub. We will be using the following example: [Meduza.ListDirectory](https://github.com/ksel172/Meduza.ListDirectory).
 
 Once we have installed the release of the module, we can upload the `.zip` to the server:
-
 ![uploading a module](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/module-upload.png)
 
 The module will be extracted and saved on the teamserver under `/modules/*`:
-
 ![uploaded module](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/module-file.png)
 
 #### Running Module Commands
@@ -187,17 +178,14 @@ The module will be extracted and saved on the teamserver under `/modules/*`:
 After a module is uploaded, we can utilize the commands that come with it. Commands can be listed using a `help` command in the terminal (which isn't functional yet in v0.3). In the future, the `ModuleName.json` file will be enumerated, and the usage, as well as other module metadata, will be easily accessible on the teamserver.
 
 Below, we will use the ListDirectory module command from the `Meduza.ListDirectory` module:
-
 ![setting a module task](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/set-module-task.png)
 
 #### Command Output
 
 Once a command is executed, the agent will contact the server with the command output. Below, we can see the output of both commands that we ran prior, using pgadmin:
-
 ![command output](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/task-output.png)
 
 User Interface for the terminal:
-
 ![agent page](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/agent-page.png)
 
 ## Module Development
