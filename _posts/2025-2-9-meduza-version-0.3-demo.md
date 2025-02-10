@@ -28,6 +28,10 @@ The project consists of three main components and aims to implement the followin
 - **Multi-platform support**, ensuring compatibility across different operating systems.
 - **Encrypted communication** using AES 256 bit with message integrity verification and TLS/SSL support.
 
+### Architecture
+
+![image displaying the basic moving components of the framework](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/C2-architecture_background.png)
+
 ---
 
 ## Demo
