@@ -1,6 +1,7 @@
+---
 layout: post
 title: Meduza v0.3 Demo
-authors: ksel172 dumbldoor mochi
+authors: [ksel172, dumbldoor, mochi]
 category: Software Development
 tags: Golang MeduzaC2 Meduza CommandAndControl ReactJS TypeScript Demo WIP C#
 ---
