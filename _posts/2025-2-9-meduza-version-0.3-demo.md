@@ -22,11 +22,11 @@ The project consists of three main components and aims to implement the followin
 - **Payload compilation using the .NET framework**.
 - **Dynamic module loading for agents**, featuring dependency resolution and streamlined development with the [ModuleBase NuGet package](https://github.com/ksel172/Meduza.Agent.ModuleBase).
 - **Support for multiple listener types**, including external listener implementation.
-- **Integration with external agents**.
-- **Intuitive user interface**, built using ReactJS.
+- **External agent support**.
+- **Intuitive and easy to navigate user interface** coded in ReactJS.
 - **Built-in MITRE ATT&CK visualization**, providing easy access to adversary tactics and techniques.
 - **Multi-platform support**, ensuring compatibility across different operating systems.
-- **End-to-end encrypted communication**, utilizing AES-256 with message integrity verification and TLS/SSL support.
+- **Encrypted communication** using AES 256 bit with message integrity verification and TLS/SSL support.
 
 ---
 
