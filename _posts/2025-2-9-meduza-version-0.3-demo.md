@@ -3,7 +3,7 @@ layout: post
 title: Meduza v0.3 Demo
 authors: [ksel172, dumbldoor, mochi]
 category: Software Development
-tags: Golang MeduzaC2 Meduza CommandAndControl ReactJS TypeScript Demo WIP C#
+tags: Golang, MeduzaC2, Meduza, CommandAndControl, ReactJS, TypeScript, Demo, WIP, C#
 excerpt: Meduza C2 v0.3 demo.
 ---
 
@@ -17,16 +17,16 @@ Meduza C2 is a modular, collaborative Command and Control framework developed us
 
 The project consists of three main components and aims to implement the following features:
 
-- **Containerized and easy-to-deploy framework** with extensive customizability.
-- **Multiplayer command and control**, allowing teams and roles for users.
-- **Payload compilation using the .NET framework**.
-- **Dynamic module loading for agents**, featuring dependency resolution and streamlined development with the [ModuleBase NuGet package](https://github.com/ksel172/Meduza.Agent.ModuleBase).
-- **Support for multiple listener types**, including external listener implementation.
-- **External agent support**.
-- **Intuitive and easy to navigate user interface** coded in ReactJS.
-- **Built-in MITRE ATT&CK visualization**, providing easy access to adversary tactics and techniques.
-- **Multi-platform support**, ensuring compatibility across different operating systems.
-- **Encrypted communication** using AES 256 bit with message integrity verification and TLS/SSL support.
+- **Containerized and easy-to-deploy framework** with extensive customizability
+- **Multiplayer command and control**, allowing teams and roles for users
+- **Payload compilation using the .NET framework**
+- **Dynamic module loading for agents**, featuring dependency resolution and streamlined development with the [ModuleBase NuGet package](https://github.com/ksel172/Meduza.Agent.ModuleBase)
+- **Support for multiple listener types**, including external listener implementation
+- **External agent support**
+- **Intuitive and easy to navigate user interface** coded in ReactJS
+- **Built-in MITRE ATT&CK visualization**, providing easy access to adversary tactics and techniques
+- **Multi-platform support**, ensuring compatibility across different operating systems
+- **Encrypted communication** using AES 256 bit with message integrity verification and TLS/SSL support
 
 ### Architecture
 
@@ -50,23 +50,22 @@ The project consists of three main components and aims to implement the followin
 
 The server's Docker Compose configuration includes four containers and a volume:
 
-- **teamserver** – Main server container.
-- **postgres** – Database.
-- **redis** – Used for caching and pub/sub functionality.
-- **pgadmin** – Database management interface.
+- **teamserver** – Main server container
+- **postgres** – Database
+- **redis** – Used for caching and pub/sub functionality
+- **pgadmin** – Database management interface
 
 The server can be started using the following command, with a `.env` file containing the necessary configuration:
 
 ```shell
 docker compose --env-file .env.dev up --force-recreate --build
-
 ```
+
 ![running the docker compose command](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/teamserver-build.png)
 
+Currently, the following arguments can be configured in the server `.env` file:
 
-Currently the following arguments can be configured in the server `.env` file:
-
-``` shell
+```shell
 # teamserver conf
 TEAMSERVER_HOSTNAME=teamserver
 TEAMSERVER_PORT=8080
@@ -104,94 +103,109 @@ JWT_SECRET=<some_secret>
 
 # refresh token cookie 
 COOKIE_PATH=/
-
 COOKIE_DOMAIN=localhost 
-
 REFRESH_SECURE=false
-
 REFRESH_HTTP=true
 
 MODULE_UPLOAD_PATH=./teamserver/modules
 ```
+
 #### Starting the Client
 
 Navigate to the client folder and run:
 
 ```shell
 npm run dev
-#or
+# or
 yarn dev
-#or
+# or
 pnpm dev
-#or
+# or
 bun dev
 ```
 
 #### Running an Agent
 
-After a payload is compiled (as will be shown in Usage) the executable can be downloaded and transported to the target or it can be used in combination with a loader to stage the payload. After it is executed, an agent is registered along with agent_info, agent_config (inheriting the payload_config) and agent_task.
+After a payload is compiled (as will be shown in Usage), the executable can be downloaded and transported to the target, or it can be used in combination with a loader to stage the payload. After it is executed, an agent is registered along with agent_info, agent_config (inheriting the payload_config), and agent_task.
 
 ### Usage
 
 #### Authenticating as a User
 
-In the image below, I authenticate as the default admin user `Meduza:Meduza`, and obtain the auth token which I set across my postman requests as the Bearer.
+In the image below, I authenticate as the default admin user `Meduza:Meduza` and obtain the auth token, which I set across my Postman requests as the Bearer.
+
 ![authentication using the default admin](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/teamserver-auth.png)
 
 The user interface (already functional sign-in during v0.3):
+
 ![authentication user interface](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/auth-ui.png)
+
 #### Starting a Listener
 
-To start a listener, we first need to create it. Based on the listener type we get a different configuration options for listener-agent communication. In this case, v0.3 only supports http listeners. However, the logic has been written for resolving other listener types and will be completed in the next version.
+To start a listener, we first need to create it. Based on the listener type, we get different configuration options for listener-agent communication. In this case, v0.3 only supports HTTP listeners. However, the logic has been written for resolving other listener types and will be completed in the next version.
 
-Below I created an http listener with a basic configuration:
+Below, I created an HTTP listener with a basic configuration:
+
 ![creation of an http listener](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/listener-create.png)
 
 After creating the listener, we can get its ID and start it:
+
 ![get listeners](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/get-listeners.png)
 
 ![starting a listener](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/start-listener.png)
 
 Which looks like this in the server log:
+
 ![logger showing listener starting](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/listener-start-cli.png)
 
 Listener creation also works in the user interface in v0.3:
+
 ![listener creation user interface](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/listener-ui.png)
+
 #### Running Shell Commands
 
 Once an agent is created and registered, we can start running commands (sending tasks to the agent). There are several command types to choose from. The most basic one is the `shell` command, which executes a command in the cmd using the `/c` prepend.
 
 Here we will run a list directory command:
+
 ![setting a shell task](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/set-shell-task.png)
+
 #### Uploading Modules
 
-One of the main goals of the project is modularity. Once a module is developed it can be packaged and released on github. We will be using the following example: [Meduza.ListDirectory](https://github.com/ksel172/Meduza.ListDirectory)
+One of the main goals of the project is modularity. Once a module is developed, it can be packaged and released on GitHub. We will be using the following example: [Meduza.ListDirectory](https://github.com/ksel172/Meduza.ListDirectory).
 
 Once we have installed the release of the module, we can upload the `.zip` to the server:
+
 ![uploading a module](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/module-upload.png)
 
 The module will be extracted and saved on the teamserver under `/modules/*`:
+
 ![uploaded module](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/module-file.png)
+
 #### Running Module Commands
 
-After a module is uploaded, we can utilize the commands that come with it. Commands can be listed using a `help` command in the terminal (which isn't functional yet in v0.3). In the future, the `ModuleName.json` file will be enumerated and the usage as well as other module metadata will be easily accessible on the teamserver. 
+After a module is uploaded, we can utilize the commands that come with it. Commands can be listed using a `help` command in the terminal (which isn't functional yet in v0.3). In the future, the `ModuleName.json` file will be enumerated, and the usage, as well as other module metadata, will be easily accessible on the teamserver.
 
 Below, we will use the ListDirectory module command from the `Meduza.ListDirectory` module:
+
 ![setting a module task](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/set-module-task.png)
 
 #### Command Output
 
-Once a command is executed, the agent will contact the server with the command output. Below we can see the output of both commands that we ran prior, using pgadmin:
+Once a command is executed, the agent will contact the server with the command output. Below, we can see the output of both commands that we ran prior, using pgadmin:
+
 ![command output](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/task-output.png)
 
 User Interface for the terminal:
+
 ![agent page](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/agent-page.png)
 
 ## Module Development
 
 ### Module Base
 
-Modules utilize the [ModuleBase NuGet package](https://github.com/ksel172/Meduza.Agent.ModuleBase). to easily create and release modules for the Meduza framework. The Module Base allows the agent to load any external assemblies that integrate the interfaces that are provided.
+Modules utilize the [ModuleBase NuGet package](https://github.com/ksel172/Meduza.Agent.ModuleBase) to easily create and release modules for the Meduza framework. The Module Base allows the agent to load any external assemblies that integrate the interfaces that are provided.
+
 ### ListDirectory Module
 
-The project referenced earlier, [Meduza.ListDirectory](https://github.com/ksel172/Meduza.ListDirectory) is an example of how a module can be developed, packaged and deployed. 
+The project referenced earlier, [Meduza.ListDirectory](https://github.com/ksel172/Meduza.ListDirectory), is an example of how a module can be developed, packaged, and deployed.
