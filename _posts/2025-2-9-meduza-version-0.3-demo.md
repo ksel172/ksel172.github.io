@@ -60,7 +60,6 @@ The server can be started using the following command, with a `.env` file contai
 ```shell
 docker compose --env-file .env.dev up --force-recreate --build
 ```
-
 ![running the docker compose command](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/teamserver-build.png)
 
 Currently, the following arguments can be configured in the server `.env` file:
@@ -136,8 +135,8 @@ In the image below, I authenticate as the default admin user `Meduza:Meduza` and
 ![authentication using the default admin](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/teamserver-auth.png)
 
 The user interface (already functional sign-in during v0.3):
-
 ![authentication user interface](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/auth-ui.png)
+
 #### Starting a Listener
 
 To start a listener, we first need to create it. Based on the listener type, we get different configuration options for listener-agent communication. In this case, v0.3 only supports HTTP listeners. However, the logic has been written for resolving other listener types and will be completed in the next version.
