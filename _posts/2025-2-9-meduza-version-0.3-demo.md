@@ -1,7 +1,9 @@
----
 layout: post
 title: Meduza v0.3 Demo
-author: ksel172, dumbldoor, mochi
+authors:
+  - ksel172
+  - dumbldoor
+  - mochi
 category: Software Development
 tags:
   - Golang
@@ -9,7 +11,7 @@ tags:
   - Meduza
   - CommandAndControl
   - ReactJS
-  - Typescript
+  - TypeScript
   - Demo
   - WIP
 ---
@@ -18,46 +20,51 @@ tags:
 
 ### Description
 
-Meduza C2 is modularity focused, collaborative Command and Control framework coded in Golang (server), C# (agent) and ReactJS (client). The project has been in development for a relatively short time and the initial goal was to rewrite an older C2 project made by ksel172 in C# and Blazor. 
+Meduza C2 is a modular, collaborative Command and Control framework developed using Golang (server), C# (agent), and ReactJS (client). The project has been in development for a relatively short time, initially aiming to rewrite an older C2 project created by ksel172 in C# and Blazor.
 
 ### Features
 
-The project consists of 3 main components and is aiming to the implementation of the following features:
-	- Containerized and easy to deploy framework with lots of customizability.
-	- Multiplayer command and control with teams and roles for users.
-	- Payload compilation using the dotnet framework.
-	- Dynamic module loading for agents with dependency resolution and quick development using the ModuleBase Nuget package - https://github.com/ksel172/Meduza.Agent.ModuleBase.
-	- Different listener types including support for external listener implementation.
-	- Support for external agents.
-	- Intuitive and easy to navigate user interface coded in ReactJS.
-	- Integrated MITRE graph providing easily accessible adversary tactics and techniques.
-	- Multi-platform support for usage across different operating systems.
-	- Encrypted communication using AES 256 bit with message integrity verification and TLS/SSL support.
+The project consists of three main components and aims to implement the following features:
+
+- **Containerized and easy-to-deploy framework** with extensive customizability.
+- **Multiplayer command and control**, allowing teams and roles for users.
+- **Payload compilation using the .NET framework**.
+- **Dynamic module loading for agents**, featuring dependency resolution and streamlined development with the [ModuleBase NuGet package](https://github.com/ksel172/Meduza.Agent.ModuleBase).
+- **Support for multiple listener types**, including external listener implementation.
+- **Integration with external agents**.
+- **Intuitive user interface**, built using ReactJS.
+- **Built-in MITRE ATT&CK visualization**, providing easy access to adversary tactics and techniques.
+- **Multi-platform support**, ensuring compatibility across different operating systems.
+- **End-to-end encrypted communication**, utilizing AES-256 with message integrity verification and TLS/SSL support.
+
+---
 
 ## Demo
 
-
-> [!NOTE] Note
-> The functionality will be previewed using postman to contact the teamserver API due to the client-server communication not being entirely finished in this milestone (v0.3).
+> **Note:** The functionality will be previewed using Postman to interact with the teamserver API, as the client-server communication is not fully implemented in this milestone (v0.3).
 
 ### Startup
 
-Requirements:
+#### Requirements:
+
 - Docker
 - .NET 8 Runtime
 - npm
+
 #### Starting the Server
 
-The server docker compose currently features four containers and a volume:
- - teamserver - Main server docker container.
- - postgres - Database.
- - redis - Used for caching and pubsub functionality.
- - pgadmin - Used for querying and database management.
+The server's Docker Compose configuration includes four containers and a volume:
 
-The server can be ran using a docker command with a `.env` file containing the server configuration:
+- **teamserver** – Main server container.
+- **postgres** – Database.
+- **redis** – Used for caching and pub/sub functionality.
+- **pgadmin** – Database management interface.
+
+The server can be started using the following command, with a `.env` file containing the necessary configuration:
 
 ```shell
 docker compose --env-file .env.dev up --force-recreate --build
+
 ```
 ![running the docker compose command](/assets/img/blogs/2025-2-9-meduza-version-0.3-demo/teamserver-build.png)
 
