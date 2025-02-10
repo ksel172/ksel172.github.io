@@ -3,7 +3,7 @@ layout: post
 title: Meduza v0.3 Demo
 authors: [ksel172, dumbldoor, mochi]
 category: Software Development
-tags: Golang, MeduzaC2, Meduza, CommandAndControl, ReactJS, TypeScript, Demo, WIP, C#
+tags: Golang, MeduzaC2, Meduza, CommandAndControl, ReactJS, TypeScript, Demo, WIP, C#, Cybersecurity
 excerpt: Meduza C2 v0.3 demo.
 ---
 
